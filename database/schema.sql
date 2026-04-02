@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS attendance (
     subject_id  INT UNSIGNED        NOT NULL,
     teacher_id  INT UNSIGNED        NOT NULL,  -- who marked it
     date        DATE                NOT NULL,
+    attendance_time TIME            NOT NULL DEFAULT '00:00:00',
     status      ENUM('present','absent','late','excused')
                                     NOT NULL DEFAULT 'absent',
     remarks     VARCHAR(255),
@@ -103,8 +104,8 @@ CREATE TABLE IF NOT EXISTS attendance (
     updated_at  TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP
                     ON UPDATE CURRENT_TIMESTAMP,
 
-    -- One record per student per subject per day
-    UNIQUE KEY uq_attendance (student_id, subject_id, date),
+    -- One record per student per subject per session
+    UNIQUE KEY uq_attendance (student_id, subject_id, date, attendance_time),
 
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
     FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE RESTRICT,
