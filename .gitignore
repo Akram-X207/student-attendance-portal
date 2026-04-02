@@ -1,0 +1,38 @@
+# ============================================================
+#  Git Ignore — Student Attendance Portal
+# ============================================================
+
+# ------------- Sensitive configuration -------------------
+# The real constants file contains DB credentials — never commit it
+app/config/constants.php
+
+# ------------- XAMPP / Local server leftovers ------------
+*.log
+*.pid
+
+# ------------- OS & editor files -------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.vscode/
+.idea/
+*.code-workspace
+
+# ------------- PHP runtime / cache -----------------------
+*.cache
+/storage/
+/tmp/
+
+# ------------- Composer (if added in future) -------------
+/vendor/
+composer.lock
+
+# ------------- Node (if added in future) -----------------
+node_modules/
+npm-debug.log*
+
+# ------------- Environment files -------------------------
+.env
+.env.*
+!.env.example
