@@ -126,3 +126,12 @@ h1, h2, h3, h4, h5, h6 {
     header { display: none !important; }
     main { margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
 }
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+  .card { padding: 1rem !important; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  .container { padding-left: 10px; padding-right: 10px; }
+  .table-responsive { width: 100%; margin-bottom: 15px; overflow-y: hidden; -ms-overflow-style: -ms-autohiding-scrollbar; }
+}
