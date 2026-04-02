@@ -1,184 +1,121 @@
-# 🎓 Student Attendance Portal
+<div align="center">
+  <h1>🎓 Student Attendance Portal</h1>
+  <p>A highly scalable, secure, and fully responsive MVC web application for institutional attendance tracking.</p>
 
-A full-stack, fully mobile-responsive web application for managing student attendance across subjects, built with **PHP (MVC)**, **MySQL**, and **Bootstrap 5**. Supports role-based access for **Admins**, **Teachers**, and **Students**.
+  [![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+  [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+  [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
+  [![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
 
----
-
-## ✨ Features
-
-### 🔐 Role-Based Access Control
-| Role | Capabilities |
-|---|---|
-| **Admin** | Manage students, teachers, subjects, and enrollments |
-| **Teacher** | Mark session attendance, view reports, export CSV |
-| **Student** | View personal attendance history with subject filtering |
-
-### 📱 Responsive Design
-- 100% Mobile, Tablet, and Desktop compatible.
-- Optimized touch-friendly tables and scaling typography.
-- Sidebars and navbars seamlessly collapse on smaller screens.
-
-### 📋 Admin Panel
-- Add / Edit / Delete students with full profile (PRN, Faculty, Program, Year, Semester, Division)
-- Manage teachers and assign them to subjects
-- Enroll / de-enroll students from subjects
-- View attendance reports per subject
-
-### 🧑‍🏫 Teacher Dashboard
-- Summary cards: assigned subjects, enrolled students, last session activity
-- Mark attendance with **date** and **12-hour AM/PM time picker**
-- Smart form: reloads pre-filled data when switching date/time sessions (supports multiple sessions per day)
-- View detailed per-subject attendance report
-- Export attendance as **CSV** (includes date & time in 12-hour format)
-
-### 🎓 Student Dashboard
-- Profile header: PRN, Name, Semester & Year at a glance
-- Overall attendance percentage with visual indicator
-- Subject-wise breakdown with session counts
-- **Attendance History Table** with subject filter & live Present/Absent counters
+  ### 🌐 [View Live Demo](https://student-attendance-portal.great-site.net)
+</div>
 
 ---
 
-## 🗂️ Project Structure
-
-```
-student-attendance-portal/
-├── app/
-│   ├── config/
-│   │   ├── constants.php          # ← NOT committed (contains credentials)
-│   │   ├── constants.example.php  # ← Copy this and rename to constants.php
-│   │   ├── database.php           # PDO singleton
-│   │   └── session.php            # Secure session handler
-│   ├── controllers/
-│   │   ├── AdminController.php
-│   │   ├── AttendanceController.php  # AJAX API endpoint
-│   │   ├── AuthController.php
-│   │   ├── StudentController.php
-│   │   └── TeacherController.php
-│   ├── models/
-│   │   ├── AttendanceModel.php
-│   │   └── StudentModel.php
-│   ├── views/
-│   │   ├── admin/
-│   │   ├── auth/
-│   │   ├── layouts/               # header.php & footer.php
-│   │   ├── student/
-│   │   └── teacher/
-│   └── helpers/
-│       └── Validator.php
-├── database/
-│   ├── schema.sql                 # Full database schema (run this first)
-│   ├── seed.sql                   # Optional demo seed data
-│   └── migrations/                # Incremental DB changes
-├── public/
-│   ├── index.php                  # Front controller / router
-│   ├── .htaccess                  # URL rewriting rules
-│   └── assets/                    # CSS, JS, images
-├── .htaccess                      # Root redirect to public/
-├── .gitignore
-└── README.md
-```
+## 📑 Table of Contents
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Architecture & Tech Stack](#-architecture--tech-stack)
+- [Getting Started (Local Development)](#-getting-started-local-development)
+- [Production Deployment](#-production-deployment)
+- [Environment Configuration](#-environment-configuration)
+- [Security Implementations](#-security-implementations)
 
 ---
 
-## 🚀 Easy Installation Guide (For Beginners)
+## 🎯 Overview
 
-Don't worry if you're not super technical! Just follow these steps:
+The **Student Attendance Portal** is a role-based attendance management system designed to eliminate conventional paper-based tracking. Built entirely from scratch using a custom MVC PHP architecture, it enforces strict data normalization and offers an intuitive, touch-friendly UI for Admins, Faculty, and Students.
 
-### Step 1: Install XAMPP
-1. Download and install [XAMPP](https://www.apachefriends.org/index.html) for Windows.
-2. Open the **XAMPP Control Panel** and start both **Apache** and **MySQL**.
+### 🔑 Demo Credentials
+Access the [Live Demo](https://student-attendance-portal.great-site.net) using these seeded credentials:
+- **Admin**: `admin@attendance.local` | `password123`
+- **Teacher**: `john@college.edu` | `password123`
+- **Student**: PRN `CS2022001` | *OTP via Email/Demo SMS*
 
-### Step 2: Download the Project
-1. Download this project as a ZIP file (click the green "Code" button at the top, then "Download ZIP"), OR use Git:
+---
+
+## ✨ Key Features
+
+### 🛡️ Secure Role-Based Access (RBAC)
+- **Super Admins**: Full institutional oversight. Manage students, faculty, subjects, and course enrollments.
+- **Faculty/Teachers**: Dedicated dashboards to log session attendance, manage multiple daily sessions (12-hour formatting), and generate deep analytical reports.
+- **Students**: Self-service portal via 3-step OTP Wizard. Real-time access to personal attendance metrics, shortfalls, and historic records.
+
+### 📱 Enterprise UI/UX
+- **Responsive by Design**: 100% Mobile, Tablet, and Desktop compatible using Bootstrap 5.
+- **Multi-Step OTP Login**: Students access the portal securely via Email OTP (PHPMailer) or a fallback on-screen Demo SMS module.
+- **Smart Forms**: Auto-reloading asynchronous states to minimize faculty data entry time when switching dates or subjects.
+
+---
+
+## 🏗 Architecture & Tech Stack
+
+The application does not rely on heavy third-party PHP frameworks like Laravel, ensuring maximum raw performance and deep customizability. 
+
+* **Backend**: PHP 8.x (Custom MVC Router & Controllers)
+* **Database**: MySQL 8+ (Normalized schema with strict foreign key constraints)
+* **Query Builder**: Raw PDO with strict prepared statement enforcements
+* **Frontend**: HTML5, Vanilla JavaScript, CSS3 variables, Bootstrap 5
+* **Mail Delivery**: PHPMailer via Composer SMTP integration
+
+---
+
+## 💻 Getting Started (Local Development)
+
+### Prerequisites
+* PHP >= 8.0
+* MySQL >= 8.0 (XAMPP/MAMP recommended)
+* Composer (optional, for package management updates)
+
+### Installation
+1. **Clone the repository**
    ```bash
    git clone https://github.com/Akram-X207/student-attendance-portal.git
+   cd student-attendance-portal
    ```
-2. Extract or move the `student-attendance-portal` folder into your XAMPP's `htdocs` directory. This is usually located at:
-   `C:\xampp\htdocs\student-attendance-portal\`
+2. **Database Setup**
+   - Create a database named `attendance_portal`.
+   - Import the schema: `database/schema.sql`
+   - Import the demo seed data: `database/seed.sql`
 
-### Step 3: Setup the Database
-1. Open your browser and go to: [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
-2. Click **New** on the left side to create a database. Name it exactly: `attendance_portal`, then click **Create**.
-3. Select your new `attendance_portal` database, click the **Import** tab at the top.
-4. Click **Choose File** and select the `database/schema.sql` file from the project folder. Click **Import** at the bottom.
-5. *(Optional but recommended)* Repeat the import step for the `database/seed.sql` file to load dummy data (students, teachers, etc.) so you can test it right away!
+3. **Environment Setup**
+   - Copy `app/config/constants.example.php` to `app/config/constants.php`.
+   - The application features an **Auto-Detecting Configuration** block. Your local `localhost` settings are already pre-configured to hit XAMPP defaults seamlessly.
 
-### Step 4: Configure the Project
-1. Go into the `app/config/` folder inside the project.
-2. Find the file named `constants.example.php`.
-3. Copy it and rename the copy to `constants.php`.
-4. Open your new `constants.php` file in any text editor (like Notepad).
-5. Ensure the database settings match (by default, XAMPP uses `root` for the user and leaves the password blank):
-   ```php
-   define('DB_HOST', 'localhost');
-   define('DB_USER', 'root');
-   define('DB_PASS', '');
-   define('DB_NAME', 'attendance_portal');
+4. **Serve**
+   Place the project directory in your `htdocs` or serve via PHP CLI:
+   ```bash
+   php -S localhost:8000 -t public
    ```
 
-### Step 5: You're Done! 🎉
-Open your browser and go to:
-[http://localhost/student-attendance-portal/public](http://localhost/student-attendance-portal/public)
+---
+
+## 🚀 Production Deployment
+
+This project is built to be deployed on any standard LAMP stack or shared hosting environment (cPanel, InfinityFree, Hostinger) with zero advanced server configurations.
+
+1. **Database Migration**
+   - Execute `schema.sql` and `seed.sql` inside your production phpMyAdmin. *(Note: Remove the `CREATE DATABASE` command from line 6 if your host restricts database creation via SQL).*
+   
+2. **Packaging**
+   - To avoid FTP timeout errors on shared hosts, package your production files natively. Zip only the following: `app/`, `database/`, `public/`, `vendor/`, and `.htaccess`.
+   
+3. **Configuration Injection**
+   - Modify your live server configuration block inside `app/config/constants.php` and ensure your `APP_URL` utilizes `https://` to prevent browser tracking blocks.
 
 ---
 
-## 🔑 Default Login Credentials
+## 🔒 Security Implementations
 
-> **Note:** These are demo seed credentials. Change them after first login.
-
-| Role | Username / Email | Password / OTP |
-|---|---|---|
-| Admin | `admin@attendance.local` | `password123` |
-| Teacher | `john@college.edu` | `password123` |
-| Student | Use your PRN (`CS2022001`) | OTP sent to email (or Demo SMS mode) |
+* **SQL Injection Prevention**: 100% coverage using PDO Prepared Statements. No raw variables are ever concatenated into SQL strings.
+* **Password Hashing**: `PASSWORD_BCRYPT` utilized for faculty and admin hashing.
+* **Session Hijacking Defenses**: Built-in cookie pathing, `HttpOnly` flags, and `session_regenerate_id()` triggers upon state changes.
+* **Route Protection**: The custom router blocks directory traversal (`../`) and enforces role-checks instantly at the Controller constructor level.
+* **Environment Obfuscation**: Root directory `.htaccess` strictly funnels traffic to the `public/` directory, keeping `app/config` isolated from the web tree.
 
 ---
 
-## 🌍 Live Server Deployment Guide (e.g., InfinityFree / cPanel)
-
-The application features an **Auto-Detecting Configuration** system that automatically switches between XAMPP and Live Server databases without requiring code edits!
-
-### 1. Database Setup
-1. In your hosting panel, create a new MySQL Database.
-2. Open **phpMyAdmin** on your server.
-3. Import `database/schema.sql`. (Note: you may need to delete the `CREATE DATABASE` lines at the very top of the `.sql` files if your shared host restricts it).
-4. Import `database/seed.sql`.
-
-### 2. File Uploading (The Clean Way)
-Many free servers fail when uploading thousands of tiny files. Use the ZIP method:
-1. On your computer, highlight exactly these items: `app`, `database`, `public`, `vendor`, and `.htaccess`.
-2. Zip them together into `upload.zip`.
-3. Open your host's **File Manager** and go inside the `htdocs` (or `public_html`) folder.
-4. Delete any default files (like `index2.html`).
-5. Upload `upload.zip` and extract/unzip it natively inside the file manager.
-
-### 3. Update the Live Constants
-Open `app/config/constants.php` on your live server and update the `else` block to include your live database credentials and live domain URL. Make sure it uses `https://` if you enable a free SSL!
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Backend | PHP 8 (MVC architecture, no framework) |
-| Database | MySQL with PDO prepared statements |
-| Frontend | Bootstrap 5, Bootstrap Icons |
-| Auth | Session-based RBAC + OTP login for students |
-| Server | Apache via XAMPP |
-
----
-
-## 🔒 Security Practices
-- All DB queries use **PDO prepared statements** (SQL injection protection)
-- **Role checks** on every controller method
-- `constants.php` excluded from version control via `.gitignore`
-- Security headers (X-Frame-Options, XSS-Protection, CSP) set in the front controller
-- Direct file access blocked via `.htaccess` and PHP guards
-
----
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
+<div align="center">
+  <p>Released under the <a href="LICENSE">MIT License</a>.</p>
+</div>
