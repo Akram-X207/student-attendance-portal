@@ -3,11 +3,7 @@
 -- Engine: MySQL 8+  |  Charset: utf8mb4
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS attendance_portal
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-USE attendance_portal;
+-- Database is assumed to be created externally (e.g. via cPanel)
 
 -- ------------------------------------------------------------
 -- TABLE: users  (Admin + Teacher accounts)

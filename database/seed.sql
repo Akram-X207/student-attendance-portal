@@ -1,5 +1,4 @@
-USE attendance_portal;
-
+-- Seed Data
 -- Seed Departments
 INSERT INTO departments (name) VALUES ('Computer Engineering'), ('IT'), ('Electronics');
 
