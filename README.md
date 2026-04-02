@@ -1,6 +1,6 @@
 # 🎓 Student Attendance Portal
 
-A full-stack web application for managing student attendance across subjects, built with **PHP (MVC)**, **MySQL**, and **Bootstrap 5**. Supports role-based access for **Admins**, **Teachers**, and **Students**.
+A full-stack, fully mobile-responsive web application for managing student attendance across subjects, built with **PHP (MVC)**, **MySQL**, and **Bootstrap 5**. Supports role-based access for **Admins**, **Teachers**, and **Students**.
 
 ---
 
@@ -10,8 +10,13 @@ A full-stack web application for managing student attendance across subjects, bu
 | Role | Capabilities |
 |---|---|
 | **Admin** | Manage students, teachers, subjects, and enrollments |
-| **Teacher** | Mark session attendance (with date & 12-hour time), view reports, export CSV |
+| **Teacher** | Mark session attendance, view reports, export CSV |
 | **Student** | View personal attendance history with subject filtering |
+
+### 📱 Responsive Design
+- 100% Mobile, Tablet, and Desktop compatible.
+- Optimized touch-friendly tables and scaling typography.
+- Sidebars and navbars seamlessly collapse on smaller screens.
 
 ### 📋 Admin Panel
 - Add / Edit / Delete students with full profile (PRN, Faculty, Program, Year, Semester, Division)
@@ -122,11 +127,34 @@ Open your browser and go to:
 
 > **Note:** These are demo seed credentials. Change them after first login.
 
-| Role | Username / PRN | Password / OTP |
+| Role | Username / Email | Password / OTP |
 |---|---|---|
-| Admin | `admin@portal.com` | `admin123` |
-| Teacher | `teacher@portal.com` | `teacher123` |
-| Student | Use your PRN | OTP shown on screen (demo mode) |
+| Admin | `admin@attendance.local` | `password123` |
+| Teacher | `john@college.edu` | `password123` |
+| Student | Use your PRN (`CS2022001`) | OTP sent to email (or Demo SMS mode) |
+
+---
+
+## 🌍 Live Server Deployment Guide (e.g., InfinityFree / cPanel)
+
+The application features an **Auto-Detecting Configuration** system that automatically switches between XAMPP and Live Server databases without requiring code edits!
+
+### 1. Database Setup
+1. In your hosting panel, create a new MySQL Database.
+2. Open **phpMyAdmin** on your server.
+3. Import `database/schema.sql`. (Note: you may need to delete the `CREATE DATABASE` lines at the very top of the `.sql` files if your shared host restricts it).
+4. Import `database/seed.sql`.
+
+### 2. File Uploading (The Clean Way)
+Many free servers fail when uploading thousands of tiny files. Use the ZIP method:
+1. On your computer, highlight exactly these items: `app`, `database`, `public`, `vendor`, and `.htaccess`.
+2. Zip them together into `upload.zip`.
+3. Open your host's **File Manager** and go inside the `htdocs` (or `public_html`) folder.
+4. Delete any default files (like `index2.html`).
+5. Upload `upload.zip` and extract/unzip it natively inside the file manager.
+
+### 3. Update the Live Constants
+Open `app/config/constants.php` on your live server and update the `else` block to include your live database credentials and live domain URL. Make sure it uses `https://` if you enable a free SSL!
 
 ---
 
