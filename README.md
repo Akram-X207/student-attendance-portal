@@ -76,54 +76,45 @@ student-attendance-portal/
 
 ---
 
-## 🚀 Local Setup (XAMPP)
+## 🚀 Easy Installation Guide (For Beginners)
 
-### 1. Prerequisites
-- [XAMPP](https://www.apachefriends.org/) (PHP 8.0+, MySQL 5.7+)
-- Git
+Don't worry if you're not super technical! Just follow these steps:
 
-### 2. Clone the Repository
-```bash
-git clone https://github.com/<your-username>/student-attendance-portal.git
-cd student-attendance-portal
-```
+### Step 1: Install XAMPP
+1. Download and install [XAMPP](https://www.apachefriends.org/index.html) for Windows.
+2. Open the **XAMPP Control Panel** and start both **Apache** and **MySQL**.
 
-### 3. Place in XAMPP `htdocs`
-Copy or clone the project into:
-```
-C:\xampp\htdocs\student-attendance-portal\
-```
-
-### 4. Configure the Database
-1. Open **phpMyAdmin** → create a database named `attendance_portal`
-2. Import the schema:
+### Step 2: Download the Project
+1. Download this project as a ZIP file (click the green "Code" button at the top, then "Download ZIP"), OR use Git:
+   ```bash
+   git clone https://github.com/Akram-X207/student-attendance-portal.git
    ```
-   database/schema.sql
-   ```
-3. *(Optional)* Import demo seed data:
-   ```
-   database/seed.sql
+2. Extract or move the `student-attendance-portal` folder into your XAMPP's `htdocs` directory. This is usually located at:
+   `C:\xampp\htdocs\student-attendance-portal\`
+
+### Step 3: Setup the Database
+1. Open your browser and go to: [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
+2. Click **New** on the left side to create a database. Name it exactly: `attendance_portal`, then click **Create**.
+3. Select your new `attendance_portal` database, click the **Import** tab at the top.
+4. Click **Choose File** and select the `database/schema.sql` file from the project folder. Click **Import** at the bottom.
+5. *(Optional but recommended)* Repeat the import step for the `database/seed.sql` file to load dummy data (students, teachers, etc.) so you can test it right away!
+
+### Step 4: Configure the Project
+1. Go into the `app/config/` folder inside the project.
+2. Find the file named `constants.example.php`.
+3. Copy it and rename the copy to `constants.php`.
+4. Open your new `constants.php` file in any text editor (like Notepad).
+5. Ensure the database settings match (by default, XAMPP uses `root` for the user and leaves the password blank):
+   ```php
+   define('DB_HOST', 'localhost');
+   define('DB_USER', 'root');
+   define('DB_PASS', '');
+   define('DB_NAME', 'attendance_portal');
    ```
 
-### 5. Set Up Configuration
-```bash
-cp app/config/constants.example.php app/config/constants.php
-```
-Then open `app/config/constants.php` and fill in your database credentials:
-```php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');       // your MySQL username
-define('DB_PASS', '');           // your MySQL password
-define('DB_NAME', 'attendance_portal');
-```
-
-### 6. Start Apache & MySQL
-Launch XAMPP and start both **Apache** and **MySQL**.
-
-### 7. Open in Browser
-```
-http://localhost/student-attendance-portal/public
-```
+### Step 5: You're Done! 🎉
+Open your browser and go to:
+[http://localhost/student-attendance-portal/public](http://localhost/student-attendance-portal/public)
 
 ---
 
