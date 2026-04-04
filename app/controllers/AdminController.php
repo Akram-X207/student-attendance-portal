@@ -333,6 +333,16 @@ class AdminController {
         $stmt->execute([$subject_id]);
         $students = $stmt->fetchAll();
 
+        // Fetch assigned teachers
+        $stmt = $db->prepare("
+            SELECT u.id, u.name, u.email 
+            FROM users u
+            JOIN teacher_subjects ts ON u.id = ts.teacher_id
+            WHERE ts.subject_id = ?
+        ");
+        $stmt->execute([$subject_id]);
+        $teachers = $stmt->fetchAll();
+
         require_once __DIR__ . '/../views/admin/subject_students.php';
     }
 
@@ -386,6 +396,24 @@ class AdminController {
         $db->prepare("DELETE FROM users WHERE id = :id AND role = 'teacher'")->execute([':id' => $id]);
         $_SESSION['success'] = "Teacher removed.";
         header("Location: " . APP_URL . "/admin/teachers");
+        exit;
+    }
+
+    /**
+     * Handle teacher unassignment
+     */
+    public function unassignTeacher() {
+        check_role(ROLE_ADMIN);
+        $subject_id = filter_input(INPUT_GET, 'subject_id', FILTER_VALIDATE_INT);
+        $teacher_id = filter_input(INPUT_GET, 'teacher_id', FILTER_VALIDATE_INT);
+        
+        if ($subject_id && $teacher_id) {
+            $db = Database::getConnection();
+            $stmt = $db->prepare("DELETE FROM teacher_subjects WHERE teacher_id = ? AND subject_id = ?");
+            $stmt->execute([$teacher_id, $subject_id]);
+            $_SESSION['success'] = "Teacher unassigned from subject.";
+        }
+        header("Location: " . APP_URL . "/admin/subject-students?id=$subject_id");
         exit;
     }
 }

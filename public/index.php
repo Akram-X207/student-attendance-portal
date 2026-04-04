@@ -78,6 +78,8 @@ switch ($controller) {
             $adminCtrl->subjectStudents();
         } else if ($action === 'unenroll-student') {
             $adminCtrl->unenrollStudent();
+        } else if ($action === 'unassign-teacher') {
+            $adminCtrl->unassignTeacher();
         } else if ($action === 'assign-teacher') {
             $adminCtrl->assignTeacher();
         } else if ($action === 'assign-student') {
