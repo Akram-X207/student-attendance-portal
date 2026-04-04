@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/main.css">
     <!-- Head Scripts -->
-    <script src="<?= APP_URL ?>/assets/js/theme.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg mb-4">
@@ -32,9 +31,6 @@
                             <a class="btn btn-sm btn-outline-danger ms-3" href="<?= APP_URL ?>/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
                         </li>
                     <?php endif; ?>
-                    <li class="nav-item ms-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-dark rounded-circle" style="width: 32px; height: 32px; padding: 0; display:flex; align-items:center; justify-content:center; border: 1px solid var(--border-color);"></button>
-                    </li>
                 </ul>
             </div>
         </div>
