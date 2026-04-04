@@ -1,121 +1,97 @@
-<div align="center">
-  <h1>🎓 Student Attendance Portal</h1>
-  <p>A highly scalable, secure, and fully responsive MVC web application for institutional attendance tracking.</p>
+# 🎓 Student Attendance Portal (SAP)
+[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue.svg)](https://php.net)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Bootstrap](https://img.shields.io/badge/UI-Bootstrap%205-563d7c.svg)](https://getbootstrap.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://student-attendance-portal.great-site.net)
 
-  [![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-  [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
-  [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
-  [![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
-
-  ### 🌐 [View Live Demo](https://student-attendance-portal.great-site.net)
-</div>
+A modern, high-performance **Attendance Management System** designed for colleges and universities. Built with a custom PHP MVC architecture, it features a sleek responsive UI, dual-mode OTP authentication, and multi-session attendance tracking.
 
 ---
 
-## 📑 Table of Contents
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Architecture & Tech Stack](#-architecture--tech-stack)
-- [Getting Started (Local Development)](#-getting-started-local-development)
-- [Production Deployment](#-production-deployment)
-- [Environment Configuration](#-environment-configuration)
-- [Security Implementations](#-security-implementations)
+## 💎 Project Overview
+This portal was developed to bridge the gap between manual attendance entry and digital record-keeping. It provides a seamless experience for administrators, faculty members, and students alike.
+
+### ✨ Key Features:
+-   **🔐 Multi-Role Security**: Role-based access for Admin, Teacher, and Student.
+-   **📱 OTP Entry (Student)**: Passwordless login via **Real Email OTP** (Gmail SMTP) or **Demo SMS OTP** for testing.
+-   **📅 Multi-Session Marking**: Supports multiple daily sessions for the same subject.
+-   **📊 Dynamic Reporting**: Real-time attendance percentage and detailed records for students and teachers.
+-   **🎯 Admin Control**: Full management of students, faculty assignments, and subjects.
+-   **🌈 Premium UI**: Responsive design inspired by Supabase, fully optimized for mobile devices.
 
 ---
 
-## 🎯 Overview
+## 📂 Project Architecture
+The project follows a modular **MVC (Model-View-Controller)** pattern for clean separation of concerns, making it highly scalable for future developments.
 
-The **Student Attendance Portal** is a role-based attendance management system designed to eliminate conventional paper-based tracking. Built entirely from scratch using a custom MVC PHP architecture, it enforces strict data normalization and offers an intuitive, touch-friendly UI for Admins, Faculty, and Students.
-
-### 🔑 Demo Credentials
-Access the [Live Demo](https://student-attendance-portal.great-site.net) using these seeded credentials:
-- **Admin**: `admin@attendance.local` | `password123`
-- **Teacher**: `john@college.edu` | `password123`
-- **Student**: PRN `CS2022001` | *OTP via Email/Demo SMS*
-
----
-
-## ✨ Key Features
-
-### 🛡️ Secure Role-Based Access (RBAC)
-- **Super Admins**: Full institutional oversight. Manage students, faculty, subjects, and course enrollments.
-- **Faculty/Teachers**: Dedicated dashboards to log session attendance, manage multiple daily sessions (12-hour formatting), and generate deep analytical reports.
-- **Students**: Self-service portal via 3-step OTP Wizard. Real-time access to personal attendance metrics, shortfalls, and historic records.
-
-### 📱 Enterprise UI/UX
-- **Responsive by Design**: 100% Mobile, Tablet, and Desktop compatible using Bootstrap 5.
-- **Multi-Step OTP Login**: Students access the portal securely via Email OTP (PHPMailer) or a fallback on-screen Demo SMS module.
-- **Smart Forms**: Auto-reloading asynchronous states to minimize faculty data entry time when switching dates or subjects.
+```text
+student-attendance-portal/
+├── app/
+│   ├── config/        # Environment & Database settings
+│   ├── controllers/   # Business logic (Routing handlers)
+│   ├── helpers/       # Mailer, Validator, and Session utils
+│   ├── models/        # Database queries (PDO-based)
+│   └── views/         # UI templates (Admin, Teacher, Student)
+├── database/
+│   ├── schema.sql     # Final production table structure
+│   └── seed.sql       # Realistic university data (Students, Faculty)
+├── public/
+│   ├── assets/        # CSS, Custom Fonts (Inter), Icons
+│   ├── .htaccess      # Frontend controller routing logic
+│   └── index.php      # Main application entry point
+├── vendor/            # Dependencies (PHPMailer)
+└── README.md          # Project Documentation
+```
 
 ---
 
-## 🏗 Architecture & Tech Stack
+## 🗺️ Local Setup Instructions (XAMPP)
+Getting the portal up and running locally is simple! Follow these 5 steps:
 
-The application does not rely on heavy third-party PHP frameworks like Laravel, ensuring maximum raw performance and deep customizability. 
+### 1. 📥 Clone the Project:
+Clone this repository to your `C:\xampp\htdocs\` folder:
+```bash
+cd C:\xampp\htdocs
+git clone https://github.com/Akram-X207/student-attendance-portal.git
+```
 
-* **Backend**: PHP 8.x (Custom MVC Router & Controllers)
-* **Database**: MySQL 8+ (Normalized schema with strict foreign key constraints)
-* **Query Builder**: Raw PDO with strict prepared statement enforcements
-* **Frontend**: HTML5, Vanilla JavaScript, CSS3 variables, Bootstrap 5
-* **Mail Delivery**: PHPMailer via Composer SMTP integration
+### 2. 🗄️ Database Import:
+-   Start **XAMPP MySQL** and open [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+-   Create a new database named **`attendance_portal`**.
+-   Import the `database/schema.sql` file first.
+-   Import the `database/seed.sql` file second to populate initial data.
 
----
+### 3. ⚙️ Configuration:
+Open `app/config/constants.php` and verify the **Local XAMPP Settings** (Line 15):
+```php
+define('APP_URL', 'http://localhost/student-attendance-portal/public');
+```
 
-## 💻 Getting Started (Local Development)
-
-### Prerequisites
-* PHP >= 8.0
-* MySQL >= 8.0 (XAMPP/MAMP recommended)
-* Composer (optional, for package management updates)
-
-### Installation
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Akram-X207/student-attendance-portal.git
-   cd student-attendance-portal
-   ```
-2. **Database Setup**
-   - Create a database named `attendance_portal`.
-   - Import the schema: `database/schema.sql`
-   - Import the demo seed data: `database/seed.sql`
-
-3. **Environment Setup**
-   - Copy `app/config/constants.example.php` to `app/config/constants.php`.
-   - The application features an **Auto-Detecting Configuration** block. Your local `localhost` settings are already pre-configured to hit XAMPP defaults seamlessly.
-
-4. **Serve**
-   Place the project directory in your `htdocs` or serve via PHP CLI:
-   ```bash
-   php -S localhost:8000 -t public
-   ```
+### 4. 🚀 Launch:
+Open your browser and visit:  
+👉 **[http://localhost/student-attendance-portal/public](http://localhost/student-attendance-portal/public)**
 
 ---
 
-## 🚀 Production Deployment
+## 👩‍💻 Usage & Test Credentials
+To test the full capability of the system, use these predefined accounts:
 
-This project is built to be deployed on any standard LAMP stack or shared hosting environment (cPanel, InfinityFree, Hostinger) with zero advanced server configurations.
-
-1. **Database Migration**
-   - Execute `schema.sql` and `seed.sql` inside your production phpMyAdmin. *(Note: Remove the `CREATE DATABASE` command from line 6 if your host restricts database creation via SQL).*
-   
-2. **Packaging**
-   - To avoid FTP timeout errors on shared hosts, package your production files natively. Zip only the following: `app/`, `database/`, `public/`, `vendor/`, and `.htaccess`.
-   
-3. **Configuration Injection**
-   - Modify your live server configuration block inside `app/config/constants.php` and ensure your `APP_URL` utilizes `https://` to prevent browser tracking blocks.
+| Role | Username / Email | Password |
+| :--- | :--- | :--- |
+| **Super Admin** | `admin@attendance.local` | `password123` |
+| **Professor** | `namdev.faculty@jspmuni` | `password123` |
+| **Student (PRN)** | `22358010004` (Shaikh Akram) | *Demo OTP on Screen* |
 
 ---
 
-## 🔒 Security Implementations
-
-* **SQL Injection Prevention**: 100% coverage using PDO Prepared Statements. No raw variables are ever concatenated into SQL strings.
-* **Password Hashing**: `PASSWORD_BCRYPT` utilized for faculty and admin hashing.
-* **Session Hijacking Defenses**: Built-in cookie pathing, `HttpOnly` flags, and `session_regenerate_id()` triggers upon state changes.
-* **Route Protection**: The custom router blocks directory traversal (`../`) and enforces role-checks instantly at the Controller constructor level.
-* **Environment Obfuscation**: Root directory `.htaccess` strictly funnels traffic to the `public/` directory, keeping `app/config` isolated from the web tree.
+## 🚀 Live Environment
+The project is live and fully functional on our demo server:  
+🔗 **[https://student-attendance-portal.great-site.net](https://student-attendance-portal.great-site.net)**
 
 ---
 
-<div align="center">
-  <p>Released under the <a href="LICENSE">MIT License</a>.</p>
-</div>
+## 📜 License
+Licensed under the **MIT License**.  
+Feel free to use and modify the code for your own educational projects! **Credit is appreciated** if you find this project helpful.
+
+Developed with ❤️ by **[Shaikh Akram](https://github.com/Akram-X207)** 🎓🤖
