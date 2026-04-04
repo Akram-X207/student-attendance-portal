@@ -25,13 +25,15 @@ CREATE TABLE IF NOT EXISTS users (
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS students (
     id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    prn             VARCHAR(20)     NOT NULL UNIQUE,   -- Permanent Registration Number
+    prn             VARCHAR(20)     NOT NULL UNIQUE,
     name            VARCHAR(120)    NOT NULL,
-    email           VARCHAR(180)    NOT NULL UNIQUE,   -- for OTP delivery
-    course          VARCHAR(80)     NOT NULL,          -- e.g. B.E., M.E.
-    department      VARCHAR(80)     NOT NULL,          -- e.g. Computer Engineering
-    year            TINYINT UNSIGNED NOT NULL,         -- 1 / 2 / 3 / 4
-    division        VARCHAR(10),                       -- e.g. A, B
+    email           VARCHAR(180)    NOT NULL UNIQUE,
+    phone           VARCHAR(20)     NULL,              -- contact number
+    program         VARCHAR(100)    NOT NULL,          -- e.g. B.Tech
+    faculty         VARCHAR(100)    NOT NULL,          -- e.g. CSE / FST
+    year            TINYINT UNSIGNED NOT NULL,         -- 3rd Year
+    semester        TINYINT UNSIGNED NOT NULL DEFAULT 1, -- Sem 6
+    division        VARCHAR(10),                       -- Div A
     is_active       TINYINT(1)      NOT NULL DEFAULT 1,
     created_at      TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
